@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.exceptions.CurrencyNotFoundException;
 import com.example.demo.model.ExchangeValue;
 import com.example.demo.repository.ExchangeRepository;
 
@@ -26,7 +27,14 @@ public class CurrencyExchangeController {
 	public ExchangeValue retrieveExchangeValue(@PathVariable String from, @PathVariable String to) {
 		
 		//ExchangeValue exchangeValue = new ExchangeValue(1000L, from, to, BigDecimal.valueOf(65));
-		ExchangeValue exchangeValue = exchangeRepository.findByFromAndTo(from, to);
+		ExchangeValue exchangeValue;
+		
+		
+		exchangeValue = exchangeRepository.findByFromAndTo(from, to);
+		
+		if(exchangeValue == null) {
+			throw new CurrencyNotFoundException("Conversion of currency from " + from + " to " + to + " not found");
+		}
 		
 		exchangeValue.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
 		return exchangeValue;
