@@ -19,6 +19,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleCurrencyNotFound(CurrencyNotFoundException ex){
 		ApiError error = new ApiError(HttpStatus.NOT_FOUND);
 		error.setMessage(ex.getMessage());
+		error.setDebugMessage("Check if the currency you want to convert is available in our documentation");
 		return buildResponseEntity(error);
 	}
 	
