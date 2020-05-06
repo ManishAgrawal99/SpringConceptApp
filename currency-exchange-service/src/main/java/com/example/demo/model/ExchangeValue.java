@@ -2,8 +2,14 @@ package com.example.demo.model;
 
 import java.math.BigDecimal;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+
+@Document(collection = "Exchange_Value")
 public class ExchangeValue {
 
+	@Id
 	private Long id;
 	private String from;
 	private String to;
