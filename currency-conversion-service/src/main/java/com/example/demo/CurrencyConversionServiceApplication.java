@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableFeignClients
+@EnableDiscoveryClient
 public class CurrencyConversionServiceApplication {
 
 	@Bean
