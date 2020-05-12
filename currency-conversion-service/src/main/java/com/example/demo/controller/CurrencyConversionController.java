@@ -34,7 +34,11 @@ public class CurrencyConversionController {
 	@GetMapping("/currency-converter/from/{from}/to/{to}/")
 	public ExchangeValue retrieveExchangeValue(@PathVariable String from, @PathVariable String to) {
 		
+		System.out.println("I am Here");
+		
 		ExchangeValue exchangeValue = currencyExchangeService.currencyExchangeWithFeign(from, to);
+		
+		System.out.println(exchangeValue);
 		
 		return exchangeValue;
 		
